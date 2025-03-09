@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Мобильный планировщик</string>
+    <string name="change_language">Сменить язык</string>
+    <string name="welcome_message">Добро пожаловать в планер</string>
+    <string name="add_task_button_txt">Добавить задачу</string>
+    <string name="rights_reserved">Все права защищены 2025</string>
+    <string name="today_plans_text">Планы на сегодня</string>
+</resources>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+
+        android:id="@+id/welcomeText"
+        android:layout_width="323dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/textColor"
+        android:fontFamily="@font/rubik_bold"
+        android:gravity="center_horizontal"
+        android:text="@string/welcome_message"
+        android:textSize="25sp" />
+    <Button
+        android:id="@+id/changeLanguageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="113dp"
+        android:textSize="16dp"
+        android:fontFamily="@font/rubik_medium"
+        android:backgroundTint="#4CAF50"
+        android:text="@string/change_language" />
+    <Button
+        android:id="@+id/addTaskButton"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_below="@+id/changeLanguageButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="113dp"
+        android:textSize="16dp"
+        android:fontFamily="@font/rubik_medium"
+        android:text="@string/add_task_button_txt" />
+
+    <Button
+        android:id="@+id/todayPlansButton"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_below="@+id/addTaskButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="113dp"
+        android:textSize="16dp"
+        android:fontFamily="@font/rubik_medium"
+        android:text="@string/today_plans_text" />
+
+
+
+    <TextView
+        android:id="@+id/allRightsReserved"
+        android:layout_width="323dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+
+        android:layout_alignParentBottom="true"
+        android:fontFamily="@font/kanit_bold"
+        android:gravity="center_horizontal"
+        android:text="@string/rights_reserved"
+        android:textSize="25sp" />
+</RelativeLayout>

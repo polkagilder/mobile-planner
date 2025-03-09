@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Mobile Planner</string>
+    <string name="change_language">Change language</string>
+    <string name="welcome_message">Welcome to a planner app</string>
+    <string name="add_task_button_txt">Add task</string>
+    <string name="rights_reserved">All rights reserved 2025</string>
+    <string name="today_plans_text">Plans for today</string>
+</resources>
