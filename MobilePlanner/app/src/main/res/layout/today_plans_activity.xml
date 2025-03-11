@@ -1,6 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout     android:id="@+id/relativeLayout" xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+<TextView
+
+        android:id="@+id/plansForToday"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/rubik_bold"
+        android:gravity="center_horizontal"
+        android:text="@string/today_plans_text"
+        android:textColor="@color/textColor"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+
+        android:id="@+id/dateText"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/plansForToday"
+
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentEnd="true"
+
+        android:fontFamily="@font/rubik_bold"
+        android:gravity="center_horizontal"
+        android:text="@string/date_text"
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/plansForToday" />
+
+    <EditText
+        android:id="@+id/dateArea"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/dateText"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+
+        android:layout_marginStart="145dp"
+        android:layout_marginEnd="145dp"
+        android:layout_marginTop="3dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateText" />
+
+
+    <TextView
+
+        android:id="@+id/toDoTodayText"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/plansForToday"
+
+
+        android:layout_alignParentEnd="true"
+
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/rubik_black"
+        android:gravity="center_horizontal"
+        android:text="@string/to_do_today_text"
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/plansForToday" />
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="140dp"-->
+<!--        android:layout_height="30dp"-->
+
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginTop="200dp"-->
+
+<!--        android:layout_marginEnd="20dp"-->
+<!--        app:cardElevation="8sp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/firstTaskArea"-->
+<!--            android:layout_width="140dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:textSize="12dp" />-->
+<!--    </androidx.cardview.widget.CardView>-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/checkCircle"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginTop="200dp"-->
+<!--        android:layout_marginEnd="165dp"-->
+<!--        android:src="@drawable/circle_gray" />-->
+
+</RelativeLayout>

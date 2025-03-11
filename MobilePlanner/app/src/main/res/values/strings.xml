@@ -5,4 +5,6 @@
     <string name="add_task_button_txt">Add task</string>
     <string name="rights_reserved">All rights reserved 2025</string>
     <string name="today_plans_text">Plans for today</string>
+    <string name="date_text">Date</string>
+    <string name="to_do_today_text">To Do Today</string>
 </resources>
