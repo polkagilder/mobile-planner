@@ -7,4 +7,5 @@
     <string name="today_plans_text">Планы на сегодня</string>
     <string name="date_text">Дата</string>
     <string name="to_do_today_text">Сделать сегодня</string>
+    <string name="return_back_text">Вернуться назад</string>
 </resources>

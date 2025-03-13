@@ -1,5 +1,7 @@
 package com.polkasol.mobileplanner;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,6 +9,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -34,12 +38,42 @@ public class TodayPlansActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button returnButton = findViewById(R.id.returnButton);
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TodayPlansActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         RelativeLayout layout = findViewById(R.id.relativeLayout);
 
+        EditText dateArea = findViewById(R.id.dateArea);
+
+        // Загружаем сохранённую дату
+        String savedDate = sharedPreferences.getString("date_text", "");
+        dateArea.setText(savedDate);
+
+        // Добавляем слушатель для автоматического сохранения
+        dateArea.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                sharedPreferences.edit().putString("date_text", s.toString()).apply();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
         int previousId = R.id.dateArea;
         int startHour = 8;
-        int endHour = 23;
+        int endHour = 20;
 
         for (int i = startHour; i <= endHour; i++) {
             // Создаем TextView (часы)
@@ -53,14 +87,14 @@ public class TodayPlansActivity extends AppCompatActivity {
             RelativeLayout.LayoutParams textParams = new RelativeLayout.LayoutParams(
                     dpToPx(40), dpToPx(30)
             );
-            textParams.setMargins(dpToPx(20), 0, 0, 0);
+            textParams.setMargins(dpToPx(0), 0, 0, 0);
 
             if (previousId == R.id.dateArea) {
                 textParams.addRule(RelativeLayout.BELOW, previousId);
-                textParams.setMargins(dpToPx(20), dpToPx(50), 0, 0);
+                textParams.setMargins(dpToPx(0), dpToPx(30), 0, 0);
             } else {
                 textParams.addRule(RelativeLayout.BELOW, previousId);
-                textParams.setMargins(dpToPx(20), dpToPx(12), 0, 0);
+                textParams.setMargins(dpToPx(0), dpToPx(12), 0, 0);
             }
 
             textView.setLayoutParams(textParams);
@@ -75,7 +109,7 @@ public class TodayPlansActivity extends AppCompatActivity {
                     dpToPx(140), dpToPx(35)
             );
             cardParams.addRule(RelativeLayout.ALIGN_TOP, textView.getId());
-            cardParams.setMargins(dpToPx(60), 0, 0, 0);
+            cardParams.setMargins(dpToPx(40), 0, 0, 0);
             cardView.setLayoutParams(cardParams);
 
             // Создаем EditText
@@ -94,7 +128,7 @@ public class TodayPlansActivity extends AppCompatActivity {
             layout.addView(cardView);
 
             // Загружаем сохранённые данные
-            String savedText = sharedPreferences.getString("text_" + i, "");
+            String savedText = sharedPreferences.getString("hour_" + i, "");
             editText.setText(savedText);
 
             previousId = textView.getId();
@@ -105,7 +139,7 @@ public class TodayPlansActivity extends AppCompatActivity {
         for (int i = 0; i < 7; i++) {
             // Создаем `ImageView` (чекбокс)
             ImageView checkCircle = new ImageView(this);
-            checkCircle.setId(3000 + i);
+            checkCircle.setId(4000 + i);
             RelativeLayout.LayoutParams imgParams = new RelativeLayout.LayoutParams(
                     dpToPx(30), dpToPx(30));
             imgParams.setMargins(dpToPx(220), (i == 0) ? dpToPx(87) : dpToPx(12), 0, 0);
@@ -114,13 +148,19 @@ public class TodayPlansActivity extends AppCompatActivity {
             checkCircle.setImageResource(R.drawable.circle_gray);
 
             // Обработчик клика (смена цвета)
+            boolean isChecked = sharedPreferences.getBoolean("checkbox_" + i, false);
+            checkCircle.setImageResource(isChecked ? R.drawable.circle_green : R.drawable.circle_gray);
+
+            // Обработчик клика
+            int finalI = i;
             checkCircle.setOnClickListener(new View.OnClickListener() {
-                boolean isChecked = false;
+                boolean checked = isChecked; // Используем загруженное состояние
 
                 @Override
                 public void onClick(View v) {
-                    isChecked = !isChecked;
-                    checkCircle.setImageResource(isChecked ? R.drawable.circle_green : R.drawable.circle_gray);
+                    checked = !checked;
+                    checkCircle.setImageResource(checked ? R.drawable.circle_green : R.drawable.circle_gray);
+                    sharedPreferences.edit().putBoolean("checkbox_" + finalI, checked).apply(); // Сохраняем сразу
                 }
             });
 
@@ -128,7 +168,7 @@ public class TodayPlansActivity extends AppCompatActivity {
 
             // Создаем `CardView` (поле ввода)
             CardView cardView = new CardView(this);
-            cardView.setId(2000 + i);
+            cardView.setId(5000 + i);
             cardView.setCardElevation(dpToPx(8));
 
             RelativeLayout.LayoutParams cardParams = new RelativeLayout.LayoutParams(
@@ -139,7 +179,7 @@ public class TodayPlansActivity extends AppCompatActivity {
 
             // Создаем `EditText`
             EditText editText = new EditText(this);
-            editText.setId(3000 + i);
+            editText.setId(6000 + i);
             editText.setTextSize(12);
             editText.setBackgroundColor(Color.TRANSPARENT);
             editText.setGravity(android.view.Gravity.CENTER);
@@ -153,7 +193,7 @@ public class TodayPlansActivity extends AppCompatActivity {
             layout.addView(cardView);
 
             // Загружаем сохранённые данные
-            String savedText = sharedPreferences.getString("text_" + i, "");
+            String savedText = sharedPreferences.getString("task_" + i, "");
             editText.setText(savedText);
 
             previousId = checkCircle.getId(); // Обновляем предыдущий ID
@@ -169,9 +209,14 @@ public class TodayPlansActivity extends AppCompatActivity {
     private void saveData() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        EditText dateArea = findViewById(R.id.dateArea);
+        if (dateArea != null) {
+            editor.putString("date_text", dateArea.getText().toString());
+        }
+
         // Сохраняем текст в задачах (7 элементов)
         for (int i = 0; i < 7; i++) {
-            EditText editText = findViewById(3000 + i);
+            EditText editText = findViewById(6000 + i);
             if (editText != null) {
                 editor.putString("task_" + i, editText.getText().toString()); // Используем уникальные ключи
             }
@@ -179,7 +224,7 @@ public class TodayPlansActivity extends AppCompatActivity {
 
         // Сохраняем текст в часовом диапазоне (8:00 - 23:00)
         for (int i = 8; i <= 23; i++) {
-            EditText editText = findViewById(4000 + i); // Убедись, что ID соответствует тем, что в XML
+            EditText editText = findViewById(3000 + i); // Убедись, что ID соответствует тем, что в XML
             if (editText != null) {
                 editor.putString("hour_" + i, editText.getText().toString()); // Уникальные ключи
             }

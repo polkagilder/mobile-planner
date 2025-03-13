@@ -7,4 +7,5 @@
     <string name="today_plans_text">Plans for today</string>
     <string name="date_text">Date</string>
     <string name="to_do_today_text">To Do Today</string>
+    <string name="return_back_text">Return Back</string>
 </resources>
